@@ -40,7 +40,7 @@
     "prepublishOnly": "npm run build",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.test.json --noEmit && tsc -p tsconfig.examples.json",
-    "test": "tsc -p tsconfig.test.json && tsc -p tsconfig.examples.json && node --test \".test-build/test/*.test.js\"",
+    "test": "tsc -p tsconfig.test.json && tsc -p tsconfig.examples.json && node --test .test-build/test/*.test.js",
     "vectors": "tsc -p tsconfig.test.json && OUTIS_WRITE_RECIPE_VECTORS=1 node --test .test-build/test/recipes.test.js"
   },
   "devDependencies": {
