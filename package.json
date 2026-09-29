@@ -13,7 +13,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "outis": "./dist/bin.js"
+    "outis": "dist/bin.js"
   },
   "exports": {
     ".": {
