@@ -4,7 +4,7 @@
 // Env: OUTIS_API_KEY (propose, read, execute), OUTIS_INTENT_KEY, OUTIS_WEBHOOK_SECRET, STRIPE_SECRET_KEY.
 import { Inngest } from "inngest";
 import Stripe from "stripe";
-import { Outis, WebhookVerificationError } from "@outis/sdk";
+import { Outis, WebhookVerificationError } from "@outis-auth/sdk";
 
 export const inngest = new Inngest({ id: "payouts" });
 

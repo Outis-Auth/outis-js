@@ -3,8 +3,8 @@
 // STRIPE_SECRET_KEY.
 import express from "express";
 import Stripe from "stripe";
-import { Outis } from "@outis/sdk";
-import { recipes } from "@outis/sdk/recipes";
+import { Outis } from "@outis-auth/sdk";
+import { recipes } from "@outis-auth/sdk/recipes";
 
 const outis = new Outis({ apiKey: process.env.OUTIS_API_KEY!, requester: "payouts-api" });
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);

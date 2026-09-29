@@ -5,7 +5,7 @@
     "noEmit": true,
     "declaration": false,
     "declarationMap": false,
-    "paths": { "@outis/sdk": ["./src/index.ts"], "@outis/sdk/recipes": ["./src/recipes.ts"] }
+    "paths": { "@outis-auth/sdk": ["./src/index.ts"], "@outis-auth/sdk/recipes": ["./src/recipes.ts"] }
   },
   "include": ["examples", "test/ambient"]
 }

@@ -2,7 +2,7 @@
 // wrangler.toml needs compatibility_flags = ["nodejs_compat"] (the SDK uses node:crypto) and
 // [triggers] crons = ["*/5 * * * *"]. Secrets: OUTIS_API_KEY, OUTIS_INTENT_KEYS, OUTIS_WEBHOOK_SECRET, STRIPE_SECRET_KEY.
 import Stripe from "stripe";
-import { Outis } from "@outis/sdk";
+import { Outis } from "@outis-auth/sdk";
 
 interface Env {
   OUTIS_API_KEY: string;

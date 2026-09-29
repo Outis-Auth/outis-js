@@ -1,6 +1,6 @@
 import { RUNTIMES, scaffold, type Runtime } from "./scaffold.js";
 
-const USAGE = `usage: npx @outis/sdk init worker [-runtime ${RUNTIMES.join("|")}]
+const USAGE = `usage: npx @outis-auth/sdk init worker [-runtime ${RUNTIMES.join("|")}]
 
 Writes a runnable worker starter into the current directory. It never overwrites a file.`;
 

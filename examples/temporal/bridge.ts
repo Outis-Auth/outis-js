@@ -2,7 +2,7 @@
 // Env: OUTIS_WEBHOOK_SECRET, TEMPORAL_ADDRESS.
 import { createServer } from "node:http";
 import { Client, Connection } from "@temporalio/client";
-import { verifyWebhook, WebhookVerificationError } from "@outis/sdk";
+import { verifyWebhook, WebhookVerificationError } from "@outis-auth/sdk";
 import { outisDecision } from "./workflows.js";
 
 async function main(): Promise<void> {

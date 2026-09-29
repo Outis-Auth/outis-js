@@ -37,7 +37,7 @@ test("every runtime's starter type-checks against this package", { timeout: 120_
         skipLibCheck: true,
         typeRoots: [join(root, "node_modules/@types")],
         types: ["node"],
-        paths: { "@outis/sdk": [join(root, "src/index.ts")], "@outis/sdk/recipes": [join(root, "src/recipes.ts")] },
+        paths: { "@outis-auth/sdk": [join(root, "src/index.ts")], "@outis-auth/sdk/recipes": [join(root, "src/recipes.ts")] },
       },
       include: ["**/*.ts", join(root, "test/ambient/*.d.ts")],
     }),

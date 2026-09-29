@@ -38,7 +38,7 @@ Publishing uses npm trusted publishing. The workflow exchanges its GitHub OIDC t
 
 Do this before pushing the first tag.
 
-1. Sign in to npmjs.com and make sure the `@outis` scope is yours. A scope belongs to the user or organization with that name. If you don't already own the `outis` account, create an organization named `outis` (Add Organization, free public plan). If the name is taken by someone else, contact npm support about it or pick another scope and rename the package.
+1. Sign in to npmjs.com and make sure the `@outis-auth` scope is yours. A scope belongs to the user or organization with that name, so create an organization named `outis-auth` (Add Organization, free public plan) if it doesn't exist yet.
 
 2. A trusted publisher can only be attached to a package that already exists, so the first version goes out by hand. From a clean checkout of `main` at the release commit, signed in to npm with an account that can publish to the scope:
 
@@ -49,7 +49,7 @@ Do this before pushing the first tag.
 
    `prepublishOnly` builds `dist/` first. Then push the `vX.Y.Z` tag as usual. The workflow sees the version is already on npm, skips publishing, and still creates the GitHub release.
 
-3. On the package page (`https://www.npmjs.com/package/@outis/sdk`), open Settings, find Trusted Publisher, and choose GitHub Actions. Fill in:
+3. On the package page (`https://www.npmjs.com/package/@outis-auth/sdk`), open Settings, find Trusted Publisher, and choose GitHub Actions. Fill in:
 
    - Organization or user: `Outis-Auth`
    - Repository: `outis-js`
@@ -65,13 +65,13 @@ Every version after the first is published by the workflow.
 Users install the SDK with:
 
 ```sh
-npm install @outis/sdk
+npm install @outis-auth/sdk
 ```
 
 The package also ships the `outis` command. Run it without installing:
 
 ```sh
-npx @outis/sdk init worker -runtime next
+npx @outis-auth/sdk init worker -runtime next
 ```
 
 Or, once the package is a dependency, call `outis` from an npm script or `npx outis`.

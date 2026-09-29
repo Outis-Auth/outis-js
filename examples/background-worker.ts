@@ -2,7 +2,7 @@
 // It stops cleanly on SIGTERM or SIGINT. Env: OUTIS_API_KEY (scopes read and execute), OUTIS_INTENT_KEYS,
 // STRIPE_SECRET_KEY.
 import Stripe from "stripe";
-import { Outis } from "@outis/sdk";
+import { Outis } from "@outis-auth/sdk";
 
 const outis = new Outis({ apiKey: process.env.OUTIS_API_KEY! });
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);

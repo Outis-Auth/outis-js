@@ -1,5 +1,5 @@
 {
-  "name": "@outis/sdk",
+  "name": "@outis-auth/sdk",
   "version": "0.1.0",
   "description": "The Outis client: ask for a human authorization, observe the decision, run sealed intents from your own worker.",
   "license": "Apache-2.0",

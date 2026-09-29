@@ -14,7 +14,7 @@ Outis never runs the operation, and it never sees your secrets, API keys or othe
 ## Install
 
 ```sh
-npm install @outis/sdk
+npm install @outis-auth/sdk
 ```
 
 It needs Node 20 or newer. You'll also need an Outis API key, passed to the client as `apiKey`.
@@ -22,7 +22,7 @@ It needs Node 20 or newer. You'll also need an Outis API key, passed to the clie
 ## Quickstart
 
 ```ts
-import { Outis } from "@outis/sdk";
+import { Outis } from "@outis-auth/sdk";
 
 const outis = new Outis({ apiKey: process.env.OUTIS_API_KEY!, requester: "payouts-api" });
 
@@ -94,7 +94,7 @@ const worker = outis.worker({
 await worker.start(); // polls, and on SIGTERM or SIGINT it finishes current runs and stops
 ```
 
-`deferTo.worker` names a key under `clients`, here `stripe`. For a starter worker on Next.js, Cloudflare, Temporal, Inngest or Trigger.dev, run `npx @outis/sdk init worker -runtime next` (or the runtime you use).
+`deferTo.worker` names a key under `clients`, here `stripe`. For a starter worker on Next.js, Cloudflare, Temporal, Inngest or Trigger.dev, run `npx @outis-auth/sdk init worker -runtime next` (or the runtime you use).
 
 When no client covers the call, add a handler under `handlers`. It gets the context first, then the call's arguments:
 
@@ -129,7 +129,7 @@ With `wait`, the real method runs after approval and you get its result. With `d
 Recipes are ready-made `guardMethod` options for popular libraries. The Stripe recipes show approvers amounts (in the smallest currency unit), the currency, account and object ids, and a short description. They never show metadata, emails or card data.
 
 ```ts
-import { recipes } from "@outis/sdk/recipes";
+import { recipes } from "@outis-auth/sdk/recipes";
 
 const createTransfer = outis.guardMethod(
   stripe.transfers,
@@ -151,7 +151,7 @@ They cover `transfers.create`, `payouts.create`, `refunds.create` and `customers
 | `TypeError`, `RangeError` | The options are wrong, for example both `wait` and `deferTo`. Nothing was sent. |
 
 ```ts
-import { NotAuthorizedError, WaitTimeoutError } from "@outis/sdk";
+import { NotAuthorizedError, WaitTimeoutError } from "@outis-auth/sdk";
 
 try {
   await outis.guard({ action: "db.restore", showApprovers: { db: "payments" }, wait: "10m" });

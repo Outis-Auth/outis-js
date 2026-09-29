@@ -1,6 +1,6 @@
 // Activities run in your Temporal worker, next to your credentials. The workflow never touches Outis directly.
 import Stripe from "stripe";
-import { Outis, type ExecutionResult } from "@outis/sdk";
+import { Outis, type ExecutionResult } from "@outis-auth/sdk";
 
 const outis = new Outis({ apiKey: process.env.OUTIS_API_KEY! });
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);

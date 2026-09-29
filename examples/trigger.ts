@@ -3,7 +3,7 @@
 // Env: OUTIS_API_KEY (propose, read, execute), OUTIS_INTENT_KEY, STRIPE_SECRET_KEY.
 import { task, wait } from "@trigger.dev/sdk";
 import Stripe from "stripe";
-import { Outis } from "@outis/sdk";
+import { Outis } from "@outis-auth/sdk";
 
 const outis = new Outis({ apiKey: process.env.OUTIS_API_KEY! });
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);

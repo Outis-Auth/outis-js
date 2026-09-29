@@ -1,7 +1,7 @@
 // app/api/outis/route.ts in a Next.js App Router project: the webhook that runs authorized intents.
 // Env: OUTIS_API_KEY (read and execute), OUTIS_INTENT_KEYS, OUTIS_WEBHOOK_SECRET, STRIPE_SECRET_KEY.
 import Stripe from "stripe";
-import { Outis } from "@outis/sdk";
+import { Outis } from "@outis-auth/sdk";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
