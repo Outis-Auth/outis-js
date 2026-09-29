@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "paths": { "@outis/sdk": ["./src/index.ts"], "@outis/sdk/recipes": ["./src/recipes.ts"] }
+  },
+  "include": ["examples", "test/ambient"]
+}
