@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+
+jobs:
+  publish:
+    name: Publish ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Check the tag matches the package version
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME doesn't match package.json version $version. Bump the version on a branch, merge it, then tag v$version on main."
+            exit 1
+          fi
+          source_version="$(node -p "require('fs').readFileSync('src/version.ts', 'utf8').match(/\"([^\"]+)\"/)[1]")"
+          if [ "$source_version" != "$version" ]; then
+            echo "::error::src/version.ts says $source_version but package.json says $version. They must agree."
+            exit 1
+          fi
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      # Trusted publishing needs npm 11.5.1 or newer, and Node 22 bundles an older npm.
+      - run: npm install -g npm@latest
+
+      - name: Pack
+        id: pack
+        run: echo "tarball=$(npm pack --silent)" >> "$GITHUB_OUTPUT"
+
+      # The first version goes out by hand (see RELEASING.md), and a re-run after a
+      # failed release step must not try to publish the same version twice.
+      - name: Check whether this version is already on npm
+        id: registry
+        run: |
+          spec="$(node -p "p = require('./package.json'); p.name + '@' + p.version")"
+          if npm view "$spec" version >/dev/null 2>&1; then
+            echo "::notice::$spec is already on npm, skipping publish"
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # No token: npm exchanges the job's OIDC token for a publish credential.
+      - name: Publish to npm
+        if: steps.registry.outputs.published == 'false'
+        run: npm publish "${{ steps.pack.outputs.tarball }}" --provenance --access public
+
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "${{ steps.pack.outputs.tarball }}" --verify-tag --generate-notes
